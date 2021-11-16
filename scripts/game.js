@@ -1,7 +1,7 @@
-import {showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
+import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
 import { Player } from './Player.js';
 import {isValidPlayerName} from './validator.js';
-import {generateNumMonsters,createMonster,attack,playGame,heal} from './gameController.js';    
+import {generateNumMonsters,createMonster,playerAttack,playGame,heal} from './gameController.js';    
 
 //INPUT PLAYER NAME 
 let player = null;
@@ -23,11 +23,11 @@ let monsters = getArrayMonsters(totalMonsters);
 
 //START ROUNDS
 
-while(true){
+do{
 
 let actionInput = showMenuPlayerAction();
 
-playGame(player,monsters,actionInput,attack,heal);
+playGame(player,monsters,actionInput,playerAttack,heal);
 
 monsters.forEach(element => {
     console.log(element);
@@ -37,7 +37,7 @@ console.log(player);
 
 break;
 
-}
+}while(true);
 
 
 

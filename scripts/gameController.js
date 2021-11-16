@@ -1,10 +1,10 @@
 import { Monster } from "./Monster.js";
 import { Player,getHealingPotsSize } from "./Player.js";
 
-const playGame = (player,monsters,action,attack,heal) => {
-  //ATTACK
+const playGame = (player,monsters,action,playerAttack,heal) => {
+  //PLAYERATTACK
   if(action == "A"){
-    attack(monsters);
+    playerAttack(monsters);
   }
 
   //HEAL
@@ -23,10 +23,13 @@ const heal = (player) => {
     } 
 }
 
-const attack = (monsters) => {
+const playerAttack = (monsters) => {
   let monsterToAttack = monsters.shift();
   monsterToAttack.life  = monsterToAttack.life - generateAttackDamage();
-  monsters.unshift(monsterToAttack);
+  //IF THE MONSTER HAVE LIFE
+  if(monsterToAttack.life > 0) {
+    monsters.unshift(monsterToAttack);
+  }
 }
 
 
@@ -37,7 +40,7 @@ const generateNumMonsters = () => {return Math.floor(Math.random() * 3) + 1};
 
 const createMonster = monsterName => {return new Monster(monsterName)};
 
-export {generateNumMonsters,createMonster,attack,playGame,heal};
+export {generateNumMonsters,createMonster,playerAttack,playGame,heal};
 
 
 
