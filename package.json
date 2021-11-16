@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "name": "monster-game",
+  "version": "1.0.0",
+  "description": "PROJECT THE MONSTER GAME BY LUIS SENDRA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ls98m/monster-game.git"
+  },
+  "author": "Luis Sendra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ls98m/monster-game/issues"
+  },
+  "homepage": "https://github.com/ls98m/monster-game#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0"
+  }
+}

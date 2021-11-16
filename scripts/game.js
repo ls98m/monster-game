@@ -1,6 +1,6 @@
 import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
 import { Player } from './Player.js';
-import {isValidPlayerName} from './validator.js';
+import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal} from './gameController.js';    
 
 //INPUT PLAYER NAME 
@@ -51,7 +51,16 @@ function getArrayMonsters(numMonsters) {
         let defaultName = "monster"+ (++b);
         let monsterName = showMenuNameMonster(defaultName);
         let monsterToAdd = {};
-        monsterName == null || monsterName == defaultName ? monsterToAdd = createMonster(defaultName) : monsterToAdd = createMonster(monsterName);
+        
+    if(monsterName == null || monsterName == undefined || monsterName == defaultName || monsterName == "") {
+       monsterToAdd = createMonster(defaultName);
+    } else {
+        if (isValidMonsterName(monsterName)){
+        monsterToAdd = createMonster(monsterName);
+        } else {
+            monsterToAdd = createMonster(defaultName);
+        }
+    }
         monsters.push(monsterToAdd);
    }
 

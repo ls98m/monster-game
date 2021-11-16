@@ -1,5 +1,5 @@
 
-const showMenuNamePlayer = () => {return prompt("Set your player name")};
+const showMenuNamePlayer = () => {return prompt("Set your player name","Anonymous")};
 
 const showMenuPlayerAction = () => {return prompt("Choose your next moviment (A -> Attack , H -> Heal)")};
 
@@ -8,7 +8,7 @@ const showNumOfMonsters = numMonsters => {console.log("NUMBER OF MONSTERS TO FIG
 const showInfoRound = (player,monsters,numMonsters) => {
     const playerDamage = getPlayerDamage(numMonsters,monsters);
     const monsterDamge = getMonsterDamage(player.life);
-        console.log("ROUND STATUS\n"+ player.name + " - D: "+playerDamage+", H: "+player.life+", P: "+player.numHealingPots+"\n"+monsters.length+" monster/s remain\n"+ );
+        console.log("ROUND STATUS\n"+ player.name + " - D: "+playerDamage+", H: "+player.life+", P: "+player.numHealingPots+"\n"+monsters.length+" monster/s remain\n");
     }
 
 const getPlayerDamage = (numMonsters,monsters) => {
