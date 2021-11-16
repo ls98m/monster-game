@@ -13,6 +13,7 @@ const playGame = (player,monsters,action,playerAttack,heal) => {
         heal(player);
     }
   }
+
 }
 
 const heal = (player) => {
@@ -26,13 +27,22 @@ const heal = (player) => {
 const playerAttack = (monsters) => {
   let monsterToAttack = monsters.shift();
   monsterToAttack.life  = monsterToAttack.life - generateAttackDamage();
-  //IF THE MONSTER HAVE LIFE
-  if(monsterToAttack.life > 0) {
+  if(monsterToAttack.life > 0){
     monsters.unshift(monsterToAttack);
   }
 }
 
+const monsterAttack = (player) => {
+  player.life -= generateAttackDamage();
+}
 
+function checkMonster(monsters) {
+  const currentMonster = monsters.shift();
+  if(currentMonster.life > 0){
+      monsters.unshift(currentMonster);
+  }
+  
+}
 
 const generateAttackDamage = () => {return  Math.floor(Math.random() * 20) + 10};
 
@@ -40,7 +50,7 @@ const generateNumMonsters = () => {return Math.floor(Math.random() * 3) + 1};
 
 const createMonster = monsterName => {return new Monster(monsterName)};
 
-export {generateNumMonsters,createMonster,playerAttack,playGame,heal};
+export {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack};
 
 
 

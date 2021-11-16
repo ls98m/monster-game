@@ -3,16 +3,19 @@ const showMenuNamePlayer = () => {return prompt("Set your player name","Anonymou
 
 const showMenuPlayerAction = () => {return prompt("Choose your next moviment (A -> Attack , H -> Heal)")};
 
-const showNumOfMonsters = numMonsters => {console.log("NUMBER OF MONSTERS TO FIGHT: "+numMonsters);};
+const showNumOfMonsters = numMonstersCreated => {console.log("NUMBER OF MONSTERS TO FIGHT: "+numMonstersCreated);};
 
-const showInfoRound = (player,monsters,numMonsters) => {
-    const playerDamage = getPlayerDamage(numMonsters,monsters);
-    const monsterDamge = getMonsterDamage(player.life);
+const showInfoRound = (player,monster,numMonstersCreated) => {
+    const playerDamage = getPlayerDamage(numMonstersCreated,monster);
         console.log("ROUND STATUS\n"+ player.name + " - D: "+playerDamage+", H: "+player.life+", P: "+player.numHealingPots+"\n"+monsters.length+" monster/s remain\n");
     }
 
-const getPlayerDamage = (numMonsters,monsters) => {
-    let damage = numMonsters * 100;
+
+    
+
+ //const playerDamage = getPlayerDamage(numMonstersCreated,monsters);   
+const getTotalPlayerDamage = (numMonstersCreated,...monsters) => {
+    let damage = numMonstersCreated * 100;
     damage -= monsters.length * 100;
     monsters.forEach(monster => {
         damage += 100 - monster.life
