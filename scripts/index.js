@@ -1,17 +1,11 @@
-const { checkPlayerName } = require("./game-controller");
-//checkPlayerName = require("./game-controller");
-let player = null;
+import {showMenuNamePlayer} from './gameView.js';
 
 //INPUT NAME PLAYER
 do {
 
-    let playerName = prompt("player name");
+    let playerName = showMenuNamePlayer();
 
-    if(checkPlayerName(playerName)){
-       console.log("ff");
-    
-    }  
+   
 
-}while(player == null);
+}while(playerName == null);
 
-console.log(player);
