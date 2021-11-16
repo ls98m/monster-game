@@ -1,14 +1,14 @@
-import {showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster} from './gameView.js';
+import {showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
 import { Player } from './Player.js';
 import {isValidPlayerName} from './validator.js';
-import {generateNumMonsters,createMonster} from './gameController.js';    
+import {generateNumMonsters,createMonster,attack,playGame,heal} from './gameController.js';    
 
-let player = null;
 //INPUT PLAYER NAME 
+let player = null;
 do {   
     let playerName = showMenuNamePlayer();
 
-    if(playerName == null) {
+    if(playerName == null || playerName == undefined) {
         player = new Player("Anonymous");
     } 
     if (isValidPlayerName(playerName)){
@@ -18,23 +18,43 @@ do {
 
 //CREATE MONSTERS
 const totalMonsters = generateNumMonsters();
-
 showNumOfMonsters(totalMonsters);
-
 let monsters = getArrayMonsters(totalMonsters);
+
+//START ROUNDS
+
+while(true){
+
+let actionInput = showMenuPlayerAction();
+
+playGame(player,monsters,actionInput,attack,heal);
+
+monsters.forEach(element => {
+    console.log(element);
+});
+
+console.log(player);
+
+break;
+
+}
+
 
 
 function getArrayMonsters(numMonsters) {
 
     let monsters = [];
 
+    let b = 0;
+
    for(let i =0;i < numMonsters;i++) {
-        let defaultName = "monster"+(i+1);
+        let defaultName = "monster"+ (++b);
         let monsterName = showMenuNameMonster(defaultName);
-        let monster;
-        monsterName == null || monsterName == defaultName ? monster = createMonster(defaultName) : monster = createMonster(monsterName);
-        monsters.push(monster);
+        let monsterToAdd = {};
+        monsterName == null || monsterName == defaultName ? monsterToAdd = createMonster(defaultName) : monsterToAdd = createMonster(monsterName);
+        monsters.push(monsterToAdd);
    }
 
+  return monsters;
 
 }
