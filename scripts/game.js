@@ -1,16 +1,8 @@
-import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
+import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction, showBannerFinalGame} from './gameView.js';
 import { Player } from './player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
 import { Monster } from './monster.js';
-function testing() {
-    console.log(player);
-    monsters.forEach(element => {
-        console.log(element);
-    });
-
-}
-
 
 //INPUT PLAYER NAME 
 let player = null;
@@ -43,17 +35,17 @@ let actionInput = showMenuPlayerAction();
 stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
 let length = monsters.length;
 playGame(player,monsters,actionInput,playerAttack,heal);
-if(length != monsters.length) {
+if(length != monsters.length && monsters.length > 0 ) {
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
-
-playGame(player,monsters,actionInput,playerAttack,heal);
-
+    playGame(player,monsters,actionInput,playerAttack,heal);
 }
-stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);   
 
+if(monsters.length > 0 ){
+stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);   
+}
 
 if(monsters.length == 0) {
-    console.log("WIN PLAYER");
+    showBannerFinalGame("win",player);
     break;
 }
 
@@ -64,13 +56,13 @@ stadisticsFinal.set("numMonstersAttacks",numMonstersAttacks++);
 stadisticsRound.set("playerLifeAfterAttack", player.life);
 
 
-//testing();
-
+if(player.life > 0){
 showInfoRound(player,monsters,totalMonsters,stadisticsRound);
+}
 
 //WIN MONSTERS
 if(player.life <= 0){
-    console.log("WIN MONSTERS");
+   showBannerFinalGame("lose",player);
     break;
 }
 
