@@ -1,12 +1,10 @@
- class Player {
 
-    constructor(name){
+   function Player(name){
         this.name = name;
         this.life = 100;
         this.numHealingPots = 2;
     }
         
-}
 
 const getHealingPotsSize = () => {return 70};
 
