@@ -8,10 +8,10 @@ const showNumOfMonsters = numMonstersCreated => {console.log("NUMBER OF MONSTERS
 const showBannerFinalGame = (result,player) => {
 
     if(result == "win"){
-        console.log("¡Victoria!" + player.name +"derrotó a todos los monstruos");
+        console.log("¡Victoria!" + player.name +" derrotó a todos los monstruos✌");
     }  
     if(result =="lose"){
-        console.log("¡" + player.name + " murió! ");
+        console.log("¡" + player.name + " murió! ☠");
     }
 }
 
