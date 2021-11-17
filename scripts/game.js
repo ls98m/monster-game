@@ -3,6 +3,14 @@ import { Player } from './Player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
 import { Monster } from './Monster.js';
+function testing() {
+    console.log(player);
+    monsters.forEach(element => {
+        console.log(element);
+    });
+
+}
+
 
 //INPUT PLAYER NAME 
 let player = null;
@@ -34,11 +42,15 @@ if(monsters.length == 0) {
     break;
 }
 
+//PARA SACAR NUM ATAQUES HACER UN CLOUSURE CON UNA FUNCION ANONIMA + MONSTERATTACK
 monsterAttack(player);
 
 
-//showInfoRound(player,monsters[0],totalMonsters);
+//COMPROBAR EL DAÑO QUE TENIA ANTES Y DESPUES DEL ATAQUE Y GUARDARLO EN UNA VARIABLE
 
+testing();
+
+//showInfoRound(player,monsters[0],totalMonsters);
 
 //WIN MONSTERS
 if(player.life <= 0){
@@ -48,14 +60,15 @@ if(player.life <= 0){
 
 }while(true);
 
+
 function getArrayMonsters(numMonsters) {
 
     let monsters = [];
 
-    let b = 0;
+    let nameGenerator = makeName();
 
    for(let i =0;i < numMonsters;i++) {
-        let defaultName = "monster"+ (++b);
+        let defaultName =  nameGenerator();
         let monsterName = showMenuNameMonster(defaultName);
         let monsterToAdd = {};
         
@@ -73,4 +86,12 @@ function getArrayMonsters(numMonsters) {
 
   return monsters;
 
+}
+
+//CLOUSURE
+function makeName(){
+    let count = 1;  
+    return function() {
+        return  "Monster "+ count++;
+    }
 }

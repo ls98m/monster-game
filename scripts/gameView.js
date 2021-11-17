@@ -10,10 +10,6 @@ const showInfoRound = (player,monster,numMonstersCreated) => {
         console.log("ROUND STATUS\n"+ player.name + " - D: "+playerDamage+", H: "+player.life+", P: "+player.numHealingPots+"\n"+monsters.length+" monster/s remain\n");
     }
 
-
-    
-
- //const playerDamage = getPlayerDamage(numMonstersCreated,monsters);   
 const getTotalPlayerDamage = (numMonstersCreated,...monsters) => {
     let damage = numMonstersCreated * 100;
     damage -= monsters.length * 100;
