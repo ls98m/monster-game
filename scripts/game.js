@@ -1,8 +1,8 @@
 import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction} from './gameView.js';
-import { Player } from './Player.js';
+import { Player } from './player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
-import { Monster } from './Monster.js';
+import { Monster } from './monster.js';
 function testing() {
     console.log(player);
     monsters.forEach(element => {
@@ -31,26 +31,42 @@ showNumOfMonsters(totalMonsters);
 let monsters = getArrayMonsters(totalMonsters);
 
 //GAME ROUNDS LOGIC
+let stadisticsRound = new Map();
+let stadisticsFinal = new Map();
+stadisticsFinal.set("numMonstersAttacks",0);
+let numMonstersAttacks = 0;
+
 do{
 
 let actionInput = showMenuPlayerAction();
 
+stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
+let length = monsters.length;
 playGame(player,monsters,actionInput,playerAttack,heal);
+if(length != monsters.length) {
+    stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
+
+playGame(player,monsters,actionInput,playerAttack,heal);
+
+}
+stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);   
+
 
 if(monsters.length == 0) {
     console.log("WIN PLAYER");
     break;
 }
 
-//PARA SACAR NUM ATAQUES HACER UN CLOUSURE CON UNA FUNCION ANONIMA + MONSTERATTACK
+
+stadisticsRound.set("playerLifeBeforeAttack", player.life);
 monsterAttack(player);
+stadisticsFinal.set("numMonstersAttacks",numMonstersAttacks++);
+stadisticsRound.set("playerLifeAfterAttack", player.life);
 
 
-//COMPROBAR EL DAÑO QUE TENIA ANTES Y DESPUES DEL ATAQUE Y GUARDARLO EN UNA VARIABLE
+//testing();
 
-testing();
-
-//showInfoRound(player,monsters[0],totalMonsters);
+showInfoRound(player,monsters,totalMonsters,stadisticsRound);
 
 //WIN MONSTERS
 if(player.life <= 0){

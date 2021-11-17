@@ -1,4 +1,4 @@
-import { Monster } from "./Monster.js";
+import { Monster } from "./monster.js";
 
 const playGame = (player,monsters,action,playerAttack,heal) => {
   //PLAYERATTACK
@@ -25,7 +25,7 @@ const heal = (player) => {
 
 const playerAttack = (monsters) => {
   let monsterToAttack = monsters.shift();
-  monsterToAttack.life  = monsterToAttack.life - generateAttackDamage();
+  monsterToAttack.life  -= generateAttackDamage();
   if(monsterToAttack.life > 0){
     monsters.unshift(monsterToAttack);
   }
@@ -35,7 +35,7 @@ const monsterAttack = (player) => {
   player.life -= generateAttackDamage();
 }
 
-const generateAttackDamage = () => {return  Math.floor(Math.random() * 20) + 10};
+const generateAttackDamage = () => {return Math.floor(Math.random() * (20 - 10)) +10;};
 
 const generateNumMonsters = () => {return Math.floor(Math.random() * 3) + 1};
 
