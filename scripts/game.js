@@ -1,4 +1,4 @@
-import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction, showBannerFinalGame,showAlertMonsterDead} from './gameView.js';
+import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction, showBannerFinalGame,showAlertMonsterDead, showStadisticsFinalGame} from './gameView.js';
 import { Player } from './player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
@@ -25,8 +25,8 @@ let monsters = getArrayMonsters(totalMonsters);
 //GAME ROUNDS LOGIC
 let stadisticsRound = new Map();
 let stadisticsFinal = new Map();
-stadisticsFinal.set("numMonstersAttacks",0);
 let numMonstersAttacks = 0;
+let totalDamageMonsters = 0;
 
 do{
 
@@ -38,11 +38,14 @@ playGame(player,monsters,actionInput,playerAttack,heal);
 
 //IF PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
 if(length != monsters.length && monsters.length > 0 ) {
+    showInfoRound(player,monsters,totalMonsters,stadisticsRound);
     showAlertMonsterDead();
     actionInput = showMenuPlayerAction();
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     playGame(player,monsters,actionInput,playerAttack,heal);
 }
+
+
 
 if(monsters.length > 0 ){
 stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);   
@@ -51,14 +54,20 @@ stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);
 //ALL MONSTERS DEAD
 if(monsters.length == 0) {
     showBannerFinalGame("win",player);
+    showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters);
     break;
 }
 
 
 stadisticsRound.set("playerLifeBeforeAttack", player.life);
+
 monsterAttack(player);
-stadisticsFinal.set("numMonstersAttacks",numMonstersAttacks++);
+
 stadisticsRound.set("playerLifeAfterAttack", player.life);
+stadisticsFinal.set("numMonstersAttacks",numMonstersAttacks++);
+totalDamageMonsters += stadisticsRound.get("playerLifeBeforeAttack") - stadisticsRound.get("playerLifeAfterAttack");
+stadisticsFinal.set("totalDamageMonsters",totalDamageMonsters);
+
 
 //PLAYER IS LIVED
 if(player.life > 0){
@@ -68,6 +77,7 @@ showInfoRound(player,monsters,totalMonsters,stadisticsRound);
 //WIN MONSTERS
 if(player.life <= 0){
    showBannerFinalGame("lose",player);
+   showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters);
    break;
 }
 

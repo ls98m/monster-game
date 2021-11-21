@@ -3,6 +3,7 @@
         this.name = name;
         this.life = 100;
         this.numHealingPots = 2;
+        this.totalAttacks = 0;
     }
         
 

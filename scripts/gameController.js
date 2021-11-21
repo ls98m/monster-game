@@ -1,9 +1,11 @@
 import { Monster } from "./monster.js";
+import { Player } from "./player.js";
 
 const playGame = (player,monsters,action,playerAttack,heal) => {
   //PLAYERATTACK
   if(action == "A"){
     playerAttack(monsters);
+    player.totalAttacks += 1;
   }
 
   //HEAL
