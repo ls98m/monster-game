@@ -5,6 +5,8 @@ const showMenuPlayerAction = () => {return prompt("Choose your next moviment (A 
 
 const showNumOfMonsters = numMonstersCreated => {console.log("NUMBER OF MONSTERS TO FIGHT: "+numMonstersCreated);};
 
+const showAlertMonsterDead = () => {console.log("¡Monster Dead! Loading Next Fight...")};
+
 const showBannerFinalGame = (result,player) => {
 
     if(result == "win"){
@@ -32,4 +34,4 @@ const getTotalPlayerDamage = (numMonstersCreated,...monsters) => {
 
 const showMenuNameMonster = (defaultName) => {return prompt("Set monster name or cancel for set preterminate name",defaultName)};
 
-export  {showMenuNamePlayer,showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction,showInfoRound,showBannerFinalGame}
+export  {showMenuNamePlayer,showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction,showInfoRound,showBannerFinalGame,showAlertMonsterDead}
