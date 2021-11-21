@@ -1,3 +1,4 @@
+import { MAX_LIFE,MIN_MONSTERS,MAX_MONSTERS } from "./conf.js";
 
 const showMenuNamePlayer = () => {return prompt("Set your player name","Anonymous")};
 
@@ -29,6 +30,7 @@ const showBannerFinalGame = (result,player) => {
 
 const showInfoRound = (player,monsters,totalMonsters,stadisticsRound) => {
         let playerDamage = stadisticsRound.get("monsterLifeBeforeAttack") - stadisticsRound.get("monsterLifeAfterAttack");
+        //CONVERT TO POSITIVE
         if(playerDamage < 0){
             playerDamage *= -1;
         }
@@ -40,10 +42,10 @@ const showInfoRound = (player,monsters,totalMonsters,stadisticsRound) => {
     }
 
 function getTotalPlayerDamage(numMonstersCreated,monsters){
-    let damage = numMonstersCreated * 100;
-    damage -= monsters.length * 100;
+    let damage = numMonstersCreated * MAX_LIFE;
+    damage -= monsters.length * MAX_LIFE;
     monsters.forEach(monster => {
-        damage += 100 - monster.life
+        damage += MAX_LIFE - monster.life
     });
 
     return damage;

@@ -3,6 +3,7 @@ import { Player } from './player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
 import { Monster } from './monster.js';
+import { MIN_LIFE } from './conf.js';
 
 //INPUT PLAYER NAME 
 let player = null;
@@ -18,7 +19,7 @@ do {
 }while(player == null);
 
 //CREATE MONSTERS
-const totalMonsters = 1;
+const totalMonsters = generateNumMonsters();
 showNumOfMonsters(totalMonsters);
 let monsters = getArrayMonsters(totalMonsters);
 
@@ -38,7 +39,7 @@ stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
 playGame(player,monsters,actionInput,playerAttack,heal);
 
 //WHEN MONSTER DEAD
-if(monsters[0].life == 0) {
+if(monsters[0].life == MIN_LIFE) {
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     stadisticsRound.set("playerLifeBeforeAttack", 0);
     stadisticsRound.set("playerLifeAfterAttack", 0);
@@ -74,17 +75,17 @@ monsterAttack(player);
 
 stadisticsRound.set("playerLifeAfterAttack", player.life);
 stadisticsFinal.set("numMonstersAttacks",numMonstersAttacks++);
-totalDamageMonsters += stadisticsRound.get("playerLifeBeforeAttack") - stadisticsRound.get("playerLifeAfterAttack");
+totalDamageMonsters += stadisticsRound.get("playerLifeBeforeAttack")- stadisticsRound.get("playerLifeAfterAttack");
 stadisticsFinal.set("totalDamageMonsters",totalDamageMonsters);
 
 
 //PLAYER IS LIVED
-if(player.life > 0){
+if(player.life > MIN_LIFE){
 showInfoRound(player,monsters,monsters.length,stadisticsRound);
 }
 
 //WIN MONSTERS
-if(player.life <= 0){
+if(player.life <= MIN_LIFE){
    showBannerFinalGame("lose",player);
    showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters);
    break;

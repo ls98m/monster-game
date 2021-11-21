@@ -1,8 +1,9 @@
+import {MAX_LIFE,NUM_HEALING_POTS} from './conf.js'
 
    function Player(name){
         this.name = name;
-        this.life = 100;
-        this.numHealingPots = 2;
+        this.life = MAX_LIFE;
+        this.numHealingPots = NUM_HEALING_POTS;
         this.totalAttacks = 0;
     }
         

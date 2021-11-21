@@ -1,6 +1,8 @@
- function Monster(name) {
+import {MAX_LIFE} from './conf.js'
+
+function Monster(name) {
         this.name = name;
-        this.life = 100;
+        this.life = MAX_LIFE;
     }
 
 

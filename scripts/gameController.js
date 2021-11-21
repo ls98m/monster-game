@@ -1,15 +1,16 @@
+import { KEY_ATTACK, KEY_HEAL, MAX_DAMAGE_ATTACK, MAX_LIFE, MAX_MONSTERS, MIN_DAMAGE_ATTACK, MIN_LIFE, MIN_MONSTERS, SIZE_HEALING_POTS } from "./conf.js";
 import { Monster } from "./monster.js";
 import { Player } from "./player.js";
 
 const playGame = (player,monsters,action,playerAttack,heal) => {
   //PLAYERATTACK
-  if(action == "A"){
+  if(action == KEY_ATTACK){
     playerAttack(monsters);
     player.totalAttacks += 1;
   }
 
   //HEAL
-  if(action == "H"){
+  if(action == KEY_HEAL){
     if(player.numHealingPots > 0) {
         heal(player);
     }
@@ -18,36 +19,33 @@ const playGame = (player,monsters,action,playerAttack,heal) => {
 }
 
 const heal = (player) => {
-    player.life += 70;
+    player.life += SIZE_HEALING_POTS;
     player.numHealingPots -= 1;
-    if(player.life > 100){
-      player.life = 100;
+    if(player.life > MAX_LIFE){
+      player.life = MAX_LIFE;
     } 
 }
 
 const playerAttack = (monsters) => {
   let monsterToAttack = monsters.shift();
   monsterToAttack.life  -= generateAttackDamage();
-  if(monsterToAttack.life <= 0){
-    monsterToAttack.life  = 0;
+  if(monsterToAttack.life <= MIN_LIFE){
+    monsterToAttack.life  = MIN_LIFE;
   }
   monsters.unshift(monsterToAttack);
 }
 
-let numMonstersAttacks = 0;
-
 const monsterAttack = (player) => {
   player.life -= generateAttackDamage();
-  numMonstersAttacks++;
 }
 
-const generateAttackDamage = () => {return Math.floor(Math.random() * (20 - 10)) +10;};
+const generateAttackDamage = () => {return Math.floor(Math.random() * (MAX_DAMAGE_ATTACK - MIN_DAMAGE_ATTACK)) +MIN_DAMAGE_ATTACK;};
 
-const generateNumMonsters = () => {return Math.floor(Math.random() * 3) + 1};
+const generateNumMonsters = () => {return Math.floor(Math.random() * MAX_MONSTERS) + MIN_MONSTERS};
 
 const createMonster = monsterName => {return new Monster(monsterName)};
 
-export {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack,numMonstersAttacks};
+export {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack};
 
 
 
