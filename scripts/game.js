@@ -37,6 +37,9 @@ let length = monsters.length;
 playGame(player,monsters,actionInput,playerAttack,heal);
 
 if(monsters[0].life == 0) {
+    stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
+    stadisticsRound.set("playerLifeBeforeAttack", 0);
+    stadisticsRound.set("playerLifeAfterAttack", 0);
     showInfoRound(player,monsters,monsters.length-1,stadisticsRound);
     showAlertMonsterDead();
     monsters.shift();
@@ -47,7 +50,6 @@ if(monsters.length > 0 && monsters.length != length) {
     actionInput = showMenuPlayerAction();
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     playGame(player,monsters,actionInput,playerAttack,heal);
-    console.log("INICIACION DE UNA RONDA FORZADA");
 }
 
 
