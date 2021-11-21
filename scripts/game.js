@@ -18,7 +18,7 @@ do {
 }while(player == null);
 
 //CREATE MONSTERS
-const totalMonsters = generateNumMonsters();
+const totalMonsters = 1;
 showNumOfMonsters(totalMonsters);
 let monsters = getArrayMonsters(totalMonsters);
 
@@ -30,29 +30,31 @@ let totalDamageMonsters = 0;
 
 do{
 
+let length = monsters.length;    
 let actionInput = showMenuPlayerAction();
 
 stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
-let length = monsters.length;
+
 playGame(player,monsters,actionInput,playerAttack,heal);
 
+//WHEN MONSTER DEAD
 if(monsters[0].life == 0) {
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     stadisticsRound.set("playerLifeBeforeAttack", 0);
     stadisticsRound.set("playerLifeAfterAttack", 0);
     showInfoRound(player,monsters,monsters.length-1,stadisticsRound);
-    showAlertMonsterDead();
     monsters.shift();
 }
 
+
+
 //IF PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
 if(monsters.length > 0 && monsters.length != length) {
+    showAlertMonsterDead();
     actionInput = showMenuPlayerAction();
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     playGame(player,monsters,actionInput,playerAttack,heal);
 }
-
-
 
 if(monsters.length > 0 ){
 stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);   
@@ -78,7 +80,7 @@ stadisticsFinal.set("totalDamageMonsters",totalDamageMonsters);
 
 //PLAYER IS LIVED
 if(player.life > 0){
-showInfoRound(player,monsters,totalMonsters,stadisticsRound);
+showInfoRound(player,monsters,monsters.length,stadisticsRound);
 }
 
 //WIN MONSTERS

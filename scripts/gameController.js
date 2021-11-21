@@ -34,8 +34,11 @@ const playerAttack = (monsters) => {
   monsters.unshift(monsterToAttack);
 }
 
+let numMonstersAttacks = 0;
+
 const monsterAttack = (player) => {
   player.life -= generateAttackDamage();
+  numMonstersAttacks++;
 }
 
 const generateAttackDamage = () => {return Math.floor(Math.random() * (20 - 10)) +10;};
@@ -44,7 +47,7 @@ const generateNumMonsters = () => {return Math.floor(Math.random() * 3) + 1};
 
 const createMonster = monsterName => {return new Monster(monsterName)};
 
-export {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack};
+export {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack,numMonstersAttacks};
 
 
 
