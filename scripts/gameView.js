@@ -28,7 +28,7 @@ const showBannerFinalGame = (result,player) => {
 }
 
 const showInfoRound = (player,monsters,totalMonsters,stadisticsRound) => {
-        console.log("ROUND STATUS\n"+ player.name + " - D: "+(stadisticsRound.get("monsterLifeBeforeAttack")- stadisticsRound.get("monsterLifeAfterAttack"))+", H: "+player.life+", P: "+player.numHealingPots+"\n"+monsters.length+" monster/s remain\n" + monsters[0].name +" - D: "+(stadisticsRound.get("playerLifeBeforeAttack")- stadisticsRound.get("playerLifeAfterAttack")+", H: "+monsters[0].life));
+        console.log("ROUND STATUS\n"+ player.name + " - D: "+(stadisticsRound.get("monsterLifeBeforeAttack")- stadisticsRound.get("monsterLifeAfterAttack"))+", H: "+player.life+", P: "+player.numHealingPots+"\n"+totalMonsters+" monster/s remain\n" + monsters[0].name +" - D: "+(stadisticsRound.get("playerLifeBeforeAttack")- stadisticsRound.get("playerLifeAfterAttack")+", H: "+monsters[0].life));
     }
 
 function getTotalPlayerDamage(numMonstersCreated,monsters){

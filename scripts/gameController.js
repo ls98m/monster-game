@@ -28,9 +28,10 @@ const heal = (player) => {
 const playerAttack = (monsters) => {
   let monsterToAttack = monsters.shift();
   monsterToAttack.life  -= generateAttackDamage();
-  if(monsterToAttack.life > 0){
-    monsters.unshift(monsterToAttack);
+  if(monsterToAttack.life <= 0){
+    monsterToAttack.life  = 0;
   }
+  monsters.unshift(monsterToAttack);
 }
 
 const monsterAttack = (player) => {

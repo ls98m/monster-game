@@ -36,13 +36,18 @@ stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
 let length = monsters.length;
 playGame(player,monsters,actionInput,playerAttack,heal);
 
-//IF PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
-if(length != monsters.length && monsters.length > 0 ) {
-    showInfoRound(player,monsters,totalMonsters,stadisticsRound);
+if(monsters[0].life == 0) {
+    showInfoRound(player,monsters,monsters.length-1,stadisticsRound);
     showAlertMonsterDead();
+    monsters.shift();
+}
+
+//IF PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
+if(monsters.length > 0 && monsters.length != length) {
     actionInput = showMenuPlayerAction();
     stadisticsRound.set("monsterLifeBeforeAttack", monsters[0].life);
     playGame(player,monsters,actionInput,playerAttack,heal);
+    console.log("INICIACION DE UNA RONDA FORZADA");
 }
 
 
