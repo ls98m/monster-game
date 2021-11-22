@@ -1,4 +1,4 @@
-import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction, showBannerFinalGame,showAlertMonsterDead, showStadisticsFinalGame} from './gameView.js';
+import {showInfoRound,showMenuNamePlayer, showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction, showBannerFinalGame,showAlertMonsterDead, showStadisticsFinalGame, showGameOver} from './gameView.js';
 import { Player } from './player.js';
 import {isValidPlayerName,isValidMonsterName} from './validator.js';
 import {generateNumMonsters,createMonster,playerAttack,playGame,heal,monsterAttack} from './gameController.js';    
@@ -49,7 +49,7 @@ if(monsters[0].life == MIN_LIFE) {
 
 
 
-//IF PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
+//PLAYER KILL A MONSTER AND LIVE MONSTERS REMAIN PUT ROUNDINFO AND CONTINUE NEW ROUND
 if(monsters.length > 0 && monsters.length != length) {
     showAlertMonsterDead();
     actionInput = showMenuPlayerAction();
@@ -64,7 +64,9 @@ stadisticsRound.set("monsterLifeAfterAttack", monsters[0].life);
 //ALL MONSTERS DEAD
 if(monsters.length == 0) {
     showBannerFinalGame("win",player);
-    showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters);
+    let timerBannerFinal = setInterval(() =>     showBannerFinalGame("win",player),2000);
+    let timerStadistics = setInterval(() => showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters), 2000);
+    let timerGameOver = setInterval(() => showGameOver(), 2000);
     break;
 }
 
@@ -86,8 +88,9 @@ showInfoRound(player,monsters,monsters.length,stadisticsRound);
 
 //WIN MONSTERS
 if(player.life <= MIN_LIFE){
-   showBannerFinalGame("lose",player);
-   showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters);
+   let timerBannerFinal = setInterval(() =>     showBannerFinalGame("lose",player),2000);
+   let timerStadistics = setInterval(() => showStadisticsFinalGame(player,stadisticsFinal,monsters,totalMonsters), 2000);
+   let timerGameOver = setInterval(() => showGameOver(), 2000);
    break;
 }
 

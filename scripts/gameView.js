@@ -2,6 +2,8 @@ import { MAX_LIFE,MIN_MONSTERS,MAX_MONSTERS } from "./conf.js";
 
 const showMenuNamePlayer = () => {return prompt("Set your player name","Anonymous")};
 
+const showGameOver = () => {console.log("GAME OVER");}
+
 const showMenuPlayerAction = () => {return prompt("Choose your next moviment (A -> Attack , H -> Heal)")};
 
 const showNumOfMonsters = numMonstersCreated => {console.log("NUMBER OF MONSTERS TO FIGHT: "+numMonstersCreated);};
@@ -21,7 +23,7 @@ const showStadisticsFinalGame = (player,stadistics,monsters,totalMonsters) => {
 const showBannerFinalGame = (result,player) => {
 
     if(result == "win"){
-        console.log("¡Victoria!" + player.name +" derrotó a todos los monstruos✌");
+        console.log("¡Victoria! " + player.name +" derrotó a todos los monstruos✌");
     }  
     if(result =="lose"){
         console.log("¡" + player.name + " murió! ☠");
@@ -54,4 +56,4 @@ function getTotalPlayerDamage(numMonstersCreated,monsters){
 
 const showMenuNameMonster = (defaultName) => {return prompt("Set monster name or cancel for set preterminate name",defaultName)};
 
-export  {showMenuNamePlayer,showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction,showInfoRound,showBannerFinalGame,showAlertMonsterDead,showStadisticsFinalGame}
+export  {showMenuNamePlayer,showNumOfMonsters,showMenuNameMonster,showMenuPlayerAction,showInfoRound,showBannerFinalGame,showAlertMonsterDead,showStadisticsFinalGame,showGameOver}
